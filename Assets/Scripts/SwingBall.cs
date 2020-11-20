@@ -5,7 +5,7 @@ using UnityEngine;
 public class SwingBall : MonoBehaviour
 {
 
-    public float speed = 2.5f;
+    public float speed = 2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +17,6 @@ public class SwingBall : MonoBehaviour
     {
     
         
-        transform.Rotate(Mathf.Sin(Time.time)/2, 0.0f, 0.0f, Space.Self);
+        transform.Rotate((Mathf.Sin(Time.time)), 0.0f, 0.0f, Space.Self);
     }
 }
