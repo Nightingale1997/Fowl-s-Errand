@@ -17,6 +17,6 @@ public class SwingBall : MonoBehaviour
     {
     
         
-        transform.Rotate((Mathf.Sin(Time.time)), 0.0f, 0.0f, Space.Self);
+        transform.Rotate((Mathf.Sin(Time.time))*2, 0.0f, 0.0f, Space.Self);
     }
 }
