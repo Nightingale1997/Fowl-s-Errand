@@ -13,18 +13,18 @@ public class CameraControl : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-    } 
+    }
 
     void CamControl()
     {
-        mouseX += Input.GetAxis("Mouse X")*RotationSpeed;
+        mouseX += Input.GetAxis("Mouse X") * RotationSpeed;
         mouseY -= Input.GetAxis("Mouse Y") * RotationSpeed;
         mouseY = Mathf.Clamp(mouseY, -35, 60); //keep the camera focused around chicken
 
         transform.LookAt(Target);
 
         Target.rotation = Quaternion.Euler(mouseY, mouseX, 0);
-        Chicken.rotation = Quaternion.Euler(0, mouseX, 0);
+        //Chicken.rotation = Quaternion.Euler(0, mouseX, 0);
         //Camera can rotate but also the chicken
 
     }
@@ -35,3 +35,4 @@ public class CameraControl : MonoBehaviour
         CamControl();
     }
 }
+
