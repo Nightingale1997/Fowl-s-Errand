@@ -5,59 +5,88 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     //public GameObject chicken;
+    public CharacterController controller;
     public float speed;
+    public float turnSmoothTime = 0.1f;
+    float turnSmoothVelocity;
+    public Transform rotationCam; //to rotate the chicken with cam
+    public Animator ChickenRun;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        ChickenRun = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
-        {
-            //chicken.GetComponent<Rigidbody>().AddForce(-10, 20, -10);
-            Vector3 chickenMovement = new Vector3(0, 0, 1) * speed * Time.deltaTime;
-            transform.Translate(chickenMovement, Space.Self);
-        }
 
-        if (Input.GetKey(KeyCode.S))
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+        
+        
+        //Change where the chicken is looking at when moving 
+        if (direction.magnitude >= 0.1f)
         {
-            Vector3 chickenMovement = new Vector3(0, 0, -1) * speed * Time.deltaTime;
-            transform.Translate(chickenMovement, Space.Self);
-            //chicken.GetComponent<Rigidbody>().AddForce(10, 20, 10);
-        }
+            //changes direction by a fixed angle
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + rotationCam.eulerAngles.y;
+            
+            //smooth change of direction
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            Vector3 chickenMovement = new Vector3(-1, 0, 0) * speed * Time.deltaTime;
-            transform.Translate(chickenMovement, Space.Self);
-            //chicken.GetComponent<Rigidbody>().AddForce(-10, 20, 10);
-        }
+            Vector3 moveDir = Quaternion.Euler(0f,targetAngle,0f)*Vector3.forward;
+            
+            //Move Chicken
+            controller.Move(moveDir.normalized * speed * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            //chicken.GetComponent<Rigidbody>().AddForce(10, 20, -10);
-            Vector3 chickenMovement = new Vector3(1, 0, 0) * speed * Time.deltaTime;
-            transform.Translate(chickenMovement, Space.Self);
-        }
+            //Animate Chicken
+            ChickenRun.Play("Run In Place");
 
+            
+
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                
+                moveDir = moveDir + new Vector3(0, 2, 0).normalized;
+                controller.Move(moveDir.normalized * speed * Time.deltaTime);
+                
+
+            }
+
+        }
+        
+
+
+
+
+        // JUMP AND RESET
+        /*
         if (Input.GetKey(KeyCode.Space))
         {
             //chicken.GetComponent<Rigidbody>().AddForce(0, 30, 0);
-            Vector3 chickenMovement = new Vector3(0, 3, 0) * speed * Time.deltaTime;
-            transform.Translate(chickenMovement, Space.Self);
-        }
+            //Vector3 chickenMovement = new Vector3(0, 3, 0) * speed * Time.deltaTime;
+            chickenMovement = new Vector3(0, 2, 0).normalized * speed * Time.deltaTime;
+            controller.Move(chickenMovement);
+            //transform.Translate(chickenMovement, Space.Self);
 
+        }
+        */
         if (Input.GetKey(KeyCode.R))
         {
-//            Vector3 chickenStand = new Vector3(0, 230, 0);
-            transform.localRotation.z.Equals(230);
-            transform.Translate(0f,0.508f,0f, Space.Self);
+            // To reset position
+            
+
         }
 
-        //rotation Y: look side ways 
-
+        //TO DO
+        // fix Jumping
+        
     }
 }
+
