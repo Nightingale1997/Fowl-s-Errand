@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarDespawner : MonoBehaviour
+public class WinGame : MonoBehaviour
 {
+    public GameObject WinUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,5 +17,13 @@ public class CarDespawner : MonoBehaviour
         
     }
 
+    void OnTriggerEnter(Collider other)
+    {
 
+        
+        if (other.gameObject.tag == "Player")
+        {
+            WinUI.SetActive(true);
+        }
+    }
 }
