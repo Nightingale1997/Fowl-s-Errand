@@ -108,8 +108,8 @@ void Update()
         if (Input.GetKey(KeyCode.R))
         {
             // To reset position
-            chickenBody.gameObject.transform.position = new Vector3(0, 0, 0);
-
+            chickenBody.gameObject.transform.position = new Vector3(14.06f, 0.3f, -34.1f);
+            
         }
 
         //TO DO
