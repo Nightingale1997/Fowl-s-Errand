@@ -5,10 +5,12 @@ using UnityEngine;
 public class WBHit : MonoBehaviour
 {
     public Rigidbody chickenThrown;
+    
     // Start is called before the first frame update
     void Start()
     {
         //chickenThrown = GetComponent<Rigidbody>();
+        
     }
 
     // Update is called once per frame
@@ -21,11 +23,14 @@ public class WBHit : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            //chickenThrown.velocity = new Vector3(0f, 1f, 0f);
-            //chickenThrown.constraints = RigidbodyConstraints.None; //let the chicken fall on its sides and face
+            chickenThrown.velocity = new Vector3(5f, 5f, 5f);
+            //chickenThrown.AddForce(5f, 5f, 5f);
+            chickenThrown.constraints = RigidbodyConstraints.None; //let the chicken fall on its sides and face
             Debug.Log("HIT");
+            
+            //chickenThrown.constraints = RigidbodyConstraints.FreezeRotationX;
+            //chickenThrown.constraints = RigidbodyConstraints.FreezeRotationZ;
         }
-        //chickenThrown.constraints = RigidbodyConstraints.FreezeRotationX;
-        //chickenThrown.constraints = RigidbodyConstraints.FreezeRotationZ;
+
     }
 }
