@@ -25,7 +25,6 @@ public class WBHit : MonoBehaviour
         {
             chickenThrown.velocity = new Vector3(5f, 5f, 5f);
             //chickenThrown.AddForce(5f, 5f, 5f);
-            chickenThrown.constraints = RigidbodyConstraints.None; //let the chicken fall on its sides and face
             Debug.Log("HIT");
             
             //chickenThrown.constraints = RigidbodyConstraints.FreezeRotationX;

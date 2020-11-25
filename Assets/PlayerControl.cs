@@ -6,7 +6,7 @@ public class PlayerControl : MonoBehaviour
 {
     //public GameObject chicken;
     public Rigidbody chickenBody;
-    public float speed;
+    public float speed = 2;
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
     public Transform rotationCam; //to rotate the chicken with cam
@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         ChickenRun = gameObject.GetComponent<Animator>();
+       
 
         // get the distance to ground
 
@@ -38,6 +39,7 @@ void Update()
 
         if (isgrounded == true)
         {
+            
             //Change where the chicken is looking at when moving 
             if (direction.magnitude >= 0.1f)
             {
@@ -54,25 +56,14 @@ void Update()
                 //controller.SimpleMove(moveDir.normalized * speed*10 * Time.deltaTime);
 
 
-                //Animate Chicken
-                if (Input.GetKey(KeyCode.LeftShift))
-                {
-                    speed = 5;
-                    ChickenRun.SetBool("Run", true);
-                }
-                else if (Input.GetKeyUp(KeyCode.LeftShift))
-                {
-                    ChickenRun.SetBool("Run", false);
-                    speed = 2;
-                }
-                else ChickenRun.SetBool("Walk", true);
+                ChickenRun.SetBool("Walk", true);
 
                 //else ChickenRun.SetBool("Walk", false);
                 //ChickenRun.Play("Walk W Root");
                 //Move Chicken
 
                 chickenBody.velocity = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward * speed;
-
+                chickenBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 
             }
             else
@@ -85,6 +76,7 @@ void Update()
         {
             ChickenRun.SetBool("Walk", false);
             ChickenRun.SetBool("Run", true);
+            chickenBody.constraints = RigidbodyConstraints.None; //let the chicken fall on its sides and face
         }
 
         /*
