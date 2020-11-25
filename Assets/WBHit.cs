@@ -17,13 +17,14 @@ public class WBHit : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
-       
-        chickenThrown.AddForce(10f, 10f, 10f);
-        //chickenThrown.constraints = RigidbodyConstraints.None; //let the chicken fall on its sides and face
-        Debug.Log("HIT");
-        
+        if (other.gameObject.tag == "Player")
+        {
+            //chickenThrown.velocity = new Vector3(0f, 1f, 0f);
+            //chickenThrown.constraints = RigidbodyConstraints.None; //let the chicken fall on its sides and face
+            Debug.Log("HIT");
+        }
         //chickenThrown.constraints = RigidbodyConstraints.FreezeRotationX;
         //chickenThrown.constraints = RigidbodyConstraints.FreezeRotationZ;
     }
