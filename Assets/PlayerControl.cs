@@ -10,7 +10,7 @@ public class PlayerControl : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
     public Transform rotationCam; //to rotate the chicken with cam
-    public Animator ChickenRun;
+    private Animator ChickenRun;
 
 
 
@@ -26,6 +26,7 @@ public class PlayerControl : MonoBehaviour
 
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
+        //float locationY = Input.GetAxisRaw(""); //Correct the Y position when walking
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
         
         
@@ -45,23 +46,40 @@ public class PlayerControl : MonoBehaviour
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
 
             //Animate Chicken
-            ChickenRun.Play("Run In Place");
-
-            
-
-
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
-                
-                moveDir = moveDir + new Vector3(0, 2, 0).normalized;
-                controller.Move(moveDir.normalized * speed * Time.deltaTime);
-                
-
+                speed = 5;
+                ChickenRun.SetBool("Run", true);
             }
+            else if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                ChickenRun.SetBool("Run", false);
+                speed = 2;
+            }
+            else ChickenRun.SetBool("Walk", true);
+
+            //else ChickenRun.SetBool("Walk", false);
+            //ChickenRun.Play("Walk W Root");
+
 
         }
-        
+        else
+        {
+            ChickenRun.SetBool("Walk", false);
+            ChickenRun.SetBool("Run", false);
+        }
 
+        /*
+        if (Input.GetButtonDown("Jump"))
+        {
+            ChickenRun.SetBool("Run", true);
+            Vector3 moveDir = new Vector3(0, 2, 0).normalized;
+            controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            if (Input.GetButtonUp("Jump")) {
+                ChickenRun.SetBool("Run", false);
+            }
+        }
+        */
 
 
 
