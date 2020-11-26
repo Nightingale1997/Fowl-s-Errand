@@ -7,6 +7,7 @@ public class MoveCar : MonoBehaviour
     private Rigidbody chickenThrown;
     public float carSpeed = 2f;
     float mass = 10;
+    public AudioSource impactCar;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +37,7 @@ public class MoveCar : MonoBehaviour
         {
             chickenThrown = other.gameObject.GetComponent<Rigidbody>();
             chickenThrown.velocity = transform.rotation * new Vector3(5f, 5f, 5f);
+            impactCar.Play(0);
         }
 
             

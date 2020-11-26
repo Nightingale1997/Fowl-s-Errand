@@ -56,6 +56,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carSpeed: 2
+  impactCar: {fileID: 8845947901817893741}
 --- !u!1001 &1027985366315950221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -120,6 +121,12 @@ PrefabInstance:
 --- !u!1 &1027985366315800919 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 162266, guid: 17683e3ffcde346458c0fa5f35c39b9c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1027985366315950221}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &8845947901817893741 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8396747655404344288, guid: 17683e3ffcde346458c0fa5f35c39b9c,
     type: 3}
   m_PrefabInstance: {fileID: 1027985366315950221}
   m_PrefabAsset: {fileID: 0}

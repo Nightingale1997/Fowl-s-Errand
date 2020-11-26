@@ -12,14 +12,14 @@ public class PlayerControl : MonoBehaviour
     public Transform rotationCam; //to rotate the chicken with cam
     private Animator ChickenRun;
     bool isgrounded = true;
-
-
+    public AudioSource idleChicken;
+    public AudioSource ChickenHit;
 
     // Start is called before the first frame update
     void Start()
     {
         ChickenRun = gameObject.GetComponent<Animator>();
-       
+        idleChicken.playOnAwake = false;
 
         // get the distance to ground
 
@@ -36,7 +36,8 @@ void Update()
         float vertical = Input.GetAxisRaw("Vertical");
         //float locationY = Input.GetAxisRaw(""); //Correct the Y position when walking
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-
+        
+        
         if (isgrounded == true)
         {
             
@@ -50,7 +51,6 @@ void Update()
                 //smooth change of direction
                 float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
                 transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-
                 Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
                 //controller.SimpleMove(moveDir.normalized * speed*10 * Time.deltaTime);
@@ -93,18 +93,7 @@ void Update()
 
 
 
-        // JUMP AND RESET
-        /*
-        if (Input.GetKey(KeyCode.Space))
-        {
-            //chicken.GetComponent<Rigidbody>().AddForce(0, 30, 0);
-            //Vector3 chickenMovement = new Vector3(0, 3, 0) * speed * Time.deltaTime;
-            chickenMovement = new Vector3(0, 2, 0).normalized * speed * Time.deltaTime;
-            controller.Move(chickenMovement);
-            //transform.Translate(chickenMovement, Space.Self);
-
-        }
-        */
+       
         if (Input.GetKey(KeyCode.R))
         {
             // To reset position
@@ -122,8 +111,10 @@ void Update()
     {
         if (other.gameObject.tag == "Ground")
         {
+            idleChicken.Play(0);
             Debug.Log("Grounded");
             isgrounded = true;
+            
         }
     }
 
@@ -132,8 +123,10 @@ void Update()
     {
         if (other.gameObject.tag == "Ground")
         {
+            ChickenHit.Play(0);
             Debug.Log("Not grounded");
-            isgrounded = false;
+            isgrounded = false;            
+            
         }
     }
 

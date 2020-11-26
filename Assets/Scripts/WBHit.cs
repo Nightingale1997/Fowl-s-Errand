@@ -8,7 +8,9 @@ public class WBHit : MonoBehaviour
     public GameObject rope;
     float speed = 2;
     float mass = 10;
-    private Vector3 initialVelocity;
+    
+    public AudioSource WreckHit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,13 +25,18 @@ public class WBHit : MonoBehaviour
         rope.transform.Rotate((Mathf.Cos(Time.time)), 0.0f, 0.0f, Space.Self);
     }
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Toon Chicken")
         {
+            WreckHit.Play(0);
+        }
 
-
-
+    }
+        void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.name == "Toon Chicken")
+        {
 
             chickenThrown.velocity = new Vector3((-1* speed * mass), speed * mass * Mathf.Sin(rope.transform.rotation.x), 9-chickenThrown.position.x);
             //vector= -1*mass*gravity*sin(angle)
