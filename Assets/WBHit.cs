@@ -7,6 +7,7 @@ public class WBHit : MonoBehaviour
     public Rigidbody chickenThrown;
     public GameObject rope;
     float speed = 2;
+    float mass = 10;
     private Vector3 initialVelocity;
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,9 @@ public class WBHit : MonoBehaviour
 
 
 
-            chickenThrown.velocity = new Vector3(speed * Mathf.Sin(rope.transform.rotation.x), chickenThrown.transform.rotation.y, chickenThrown.transform.position.z);
+            chickenThrown.velocity = new Vector3((-1* speed * mass), speed * mass * Mathf.Sin(rope.transform.rotation.x), 9-chickenThrown.position.x);
+            //vector= -1*mass*gravity*sin(angle)
+            //9 is the initial center position of the 
             Debug.Log(chickenThrown.velocity);
             Debug.Log(rope.transform.rotation.x);
             //chickenThrown.AddForce(5f, 5f, 5f);
