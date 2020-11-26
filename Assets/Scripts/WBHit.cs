@@ -7,7 +7,7 @@ public class WBHit : MonoBehaviour
     public Rigidbody chickenThrown;
     public GameObject rope;
     float speed = 2;
-    float mass = 10;
+    float mass = 6;
     
     public AudioSource WreckHit;
 
@@ -38,7 +38,8 @@ public class WBHit : MonoBehaviour
         if (other.gameObject.name == "Toon Chicken")
         {
 
-            chickenThrown.velocity = new Vector3((-1* speed * mass), speed * mass * Mathf.Sin(rope.transform.rotation.x), 9-chickenThrown.position.x);
+            
+            chickenThrown.velocity = new Vector3((-1* speed * mass), speed * mass * Mathf.Sin(rope.transform.rotation.x), chickenThrown.transform.rotation.y);
             //vector= -1*mass*gravity*sin(angle)
             //9 is the initial center position of the 
             Debug.Log(chickenThrown.velocity);

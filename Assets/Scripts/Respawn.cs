@@ -22,7 +22,7 @@ public class Respawn : MonoBehaviour
 
         if (other.gameObject.tag == "Water")
         {
-            transform.position = new Vector3(-5.31f, 0.5f, -39);
+            transform.position = new Vector3(14.06f, 0.3f, -34.1f);            
         }
     }
 }
