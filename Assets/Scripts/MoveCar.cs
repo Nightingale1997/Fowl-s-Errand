@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class MoveCar : MonoBehaviour
 {
+    private Rigidbody chickenThrown;
     public float carSpeed = 2f;
+    float mass = 10;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
- void Update()
+    void Update()
     {
         Vector3 carMovement = new Vector3(10, 0, 0) * carSpeed * Time.deltaTime;
         transform.Translate(carMovement, Space.Self);
@@ -27,5 +29,17 @@ public class MoveCar : MonoBehaviour
             Destroy(gameObject);
             //or gameObject.SetActive(false);
         }
+    }
+
+    void OnTriggerStay(Collider other) {
+        if (other.gameObject.name == "Toon Chicken")
+        {
+            chickenThrown = other.gameObject.GetComponent<Rigidbody>();
+            chickenThrown.velocity = transform.rotation * new Vector3(5f, 5f, 5f);
+        }
+
+            
+        
+    
     }
 }

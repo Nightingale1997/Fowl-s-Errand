@@ -16,6 +16,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &-3334150405766674576
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5892782777184419082}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0803933, y: 0.030644886, z: 0.02936099}
+  m_Center: {x: 0.0026170518, y: -0.002, z: 1.8595272e-17}
 --- !u!64 &8289807686386043128
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -25,7 +38,7 @@ MeshCollider:
   m_GameObject: {fileID: 5892782777184419082}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -52,7 +65,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 157538, guid: 7c1716c1e067ded44af1dbfe0c4b32ae, type: 3}
       propertyPath: m_Name
-      value: Truck_2_Blue
+      value: Truck_2_Blue Variant
       objectReference: {fileID: 0}
     - target: {fileID: 456038, guid: 7c1716c1e067ded44af1dbfe0c4b32ae, type: 3}
       propertyPath: m_LocalPosition.x
